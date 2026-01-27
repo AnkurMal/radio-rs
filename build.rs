@@ -8,17 +8,20 @@ fn main() {
     build
         .file("raudio/src/raudio.c")
         .include("raudio/src")
+        .define("RAUDIO_IMPLEMENTATION", None)
         .define("RAUDIO_STANDALONE", None)
         .define("PLATFORM_DESKTOP", None);
 
     match target.as_str() {
         "windows" => {
+            build.define("_CRT_SECURE_NO_WARNINGS", None);
             println!("cargo:rustc-link-lib=winmm");
             println!("cargo:rustc-link-lib=ole32");
         }
         "linux" => {
             println!("cargo:rustc-link-lib=asound");
-            println!("cargo:rustc-link-lib=pulse");
+            println!("cargo:rustc-link-lib=pthread");
+            println!("cargo:rustc-link-lib=dl");
         }
         "macos" => {
             println!("cargo:rustc-link-lib=framework=CoreAudio");
@@ -28,5 +31,5 @@ fn main() {
         _ => panic!("Unsupported platform"),
     }
 
-    build.compile("raudio");
+    build.compile("audio");
 }
