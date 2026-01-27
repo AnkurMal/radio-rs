@@ -347,8 +347,6 @@ impl Drop for Music {
     }
 }
 
-#[unsafe(no_mangle)]
-#[link(name = "audio")]
 unsafe extern "C" {
     fn InitAudioDevice();
     fn CloseAudioDevice();
