@@ -1,11 +1,12 @@
 [package]
 name = "radio-rs"
-version = "2.0.2"
-edition = "2021"
+version = "2.0.3"
+edition = "2024"
 authors = ["Ankur Mallick <ankurmallick80@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/AnkurMal/radio"
 description = "A very simple, high level, audio playback library, ported from raudio library, for games."
 build = "build.rs"
 
-[dependencies]
+[build-dependencies]
+cc = "1.2.54"
