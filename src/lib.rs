@@ -223,7 +223,7 @@ impl Sound {
         unsafe { IsSoundPlaying(self.clone()) }
     }
 
-    pub fn set_voume(&self, volume: f32) {
+    pub fn set_volume(&self, volume: f32) {
         unsafe {
             SetSoundVolume(self.clone(), volume as c_float);
         }

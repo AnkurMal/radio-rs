@@ -1,7 +1,9 @@
 use std::env;
+use std::path::PathBuf;
 
 fn main() {
     let target = env::var("CARGO_CFG_TARGET_OS").unwrap();
+    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
 
     let mut build = cc::Build::new();
 
@@ -32,4 +34,9 @@ fn main() {
     }
 
     build.compile("audio");
+
+    println!("cargo:rustc-link-search=native={}", out_dir.display());
+    println!("cargo:rustc-link-lib=static=audio");
+
+    println!("cargo:rerun-if-changed=raudio/src/raudio.c");
 }
